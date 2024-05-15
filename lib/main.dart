@@ -1,8 +1,16 @@
-import 'package:assignment8/features/home/presentation/pages/home_page.dart';
+import 'package:assignment8/core/di/di_container.dart';
+import 'package:assignment8/features/onboarding/presentation/pages/onboarding_page.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  setup();
+  runApp(
+    DevicePreview(
+      enabled: false,
+      builder: (context) => const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -10,13 +18,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Stack(
-        children: [
-          HomePage(),
-        ],
-      ),
+      home: OnboardingPage(),
     );
   }
 }

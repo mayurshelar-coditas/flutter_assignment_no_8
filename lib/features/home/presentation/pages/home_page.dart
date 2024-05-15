@@ -1,263 +1,286 @@
-import 'package:assignment8/core/contants/contants.dart';
-import 'package:assignment8/core/themes/app_pallete.dart';
-import 'package:assignment8/features/home/presentation/pages/product_description_page.dart';
-import 'package:assignment8/features/home/presentation/widgets/category_widget.dart';
-import 'package:assignment8/features/home/presentation/widgets/custom_app_bar.dart';
-import 'package:assignment8/features/home/presentation/widgets/custom_bottom_navigation_bar.dart';
-import 'package:assignment8/features/home/presentation/widgets/product_widget.dart';
-import 'package:assignment8/features/home/presentation/widgets/text_box_widget.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:assignment8/core/constants/constants.dart';
+import 'package:assignment8/core/di/di_container.dart';
+import 'package:assignment8/core/theme/app_pallete.dart';
+import 'package:assignment8/features/cart/presentation/pages/cart_page.dart';
+import 'package:assignment8/features/home/presentation/pages/food_item_description.dart';
 
+import 'package:assignment8/features/home/presentation/widgets/custom_bottom_nav_bar.dart';
+import 'package:assignment8/features/home/presentation/widgets/food_item_container_widget.dart';
+import 'package:autoscale_tabbarview/autoscale_tabbarview.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/widgets.dart';
+
+import 'package:flutter_svg/svg.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({super.key});
-
-  final CarouselController carouselController = CarouselController();
-  static late BuildContext buildContext;
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    buildContext = context;
-    var mediaQuery = MediaQuery.of(context);
-    var screenHeight = mediaQuery.size.height;
-    var screenWidth = mediaQuery.size.width;
-    return Stack(
-      children: [
-        Scaffold(
-          backgroundColor: AppPallete.whiteColor,
-          appBar: CustomAppBar(
-            screenHeight: screenHeight,
-            screenWidth: screenWidth,
-            mediaQuery: mediaQuery,
+    return Scaffold(
+      backgroundColor: AppPallete.secondBackground,
+      appBar: AppBar(
+        leadingWidth: 130,
+        backgroundColor: AppPallete.secondBackground,
+        leading: IconButton(
+          onPressed: () {
+            ZoomDrawer.of(context)!.toggle();
+          },
+          icon: SvgPicture.asset(
+            'assets/icons/menu.svg',
           ),
-          body: Padding(
-            padding: EdgeInsets.only(
-              left: screenWidth * 0.029,
-              right: screenWidth * 0.032,
-              bottom: mediaQuery.padding.bottom,
-              top: screenHeight * 0.0297029,
+        ),
+        actions: [
+          IconButton(
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const CartPage(),
+              ),
             ),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      Positioned(
-                        child: CarouselSlider(
-                          carouselController: carouselController,
-                          items: Constants.latestList
-                              .map(
-                                (e) => SizedBox(
-                                  width: screenWidth * 0.936,
-                                  height: screenHeight * 0.2413366,
-                                  child: Image(
-                                    image: AssetImage(e),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              )
-                              .toList(),
-                          options: CarouselOptions(
-                            enlargeCenterPage: true,
-                            enableInfiniteScroll: false,
-                            viewportFraction: 1,
-                            scrollPhysics: const NeverScrollableScrollPhysics(),
-                            autoPlay: false,
-                          ),
-                        ),
+            icon: SvgPicture.asset("assets/icons/shopping-cart.svg"),
+          ),
+          const SizedBox(
+            width: 18,
+          )
+        ],
+      ),
+      bottomNavigationBar: const CustomBottomNavBar(),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Padding(
+          padding: const EdgeInsets.only(
+            left: 50,
+          ),
+          child: DefaultTabController(
+            length: 4,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 16,
+                ),
+                const Text(
+                  "Delicious \nfood for you",
+                  style: TextStyle(
+                    fontFamily: "sfProRounded",
+                    fontSize: 34,
+                    height: 1.16,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(
+                  height: 28,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 50),
+                  child: SearchBar(
+                    hintText: "Search",
+                    hintStyle: MaterialStateProperty.all(
+                      TextStyle(
+                        fontSize: 17,
+                        fontFamily: 'sfProRoundedSemibold',
+                        fontWeight: FontWeight.w700,
+                        color: AppPallete.blackColor.withOpacity(0.5),
                       ),
-                      Positioned(
-                        top: screenHeight * 0.0621188119,
-                        left: screenWidth * 0.63333,
-                        right: screenWidth * 0.026666,
-                        child: Column(
-                          children: [
-                            Text(
-                              "This season’s latest",
-                              softWrap: true,
-                              textAlign: TextAlign.justify,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 3,
-                              style: GoogleFonts.playfairDisplay(
-                                fontSize: screenWidth * 0.058666,
-                                fontWeight: FontWeight.w700,
-                                backgroundColor: AppPallete.whiteColor,
-                              ),
-                            ),
-                            SizedBox(
-                              height: screenHeight * 0.0211148515,
-                            ),
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                InkWell(
-                                  onTap: () =>
-                                      carouselController.previousPage(),
-                                  child: Container(
-                                    height: screenHeight * 0.0631188119,
-                                    width: screenWidth * 0.136,
-                                    padding: EdgeInsets.fromLTRB(
-                                        screenWidth * 0.032,
-                                        screenHeight * 0.0176701,
-                                        screenWidth * 0.03034666,
-                                        screenHeight * 0.0188219),
-                                    decoration: const BoxDecoration(
-                                      color: AppPallete.blackColor,
-                                    ),
-                                    child: SvgPicture.asset(
-                                      'assets/icons/left_arrow.svg',
-                                      height: screenHeight * 0.0302617,
-                                      width: screenWidth * 0.0736533,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: screenWidth * 0.004,
-                                ),
-                                InkWell(
-                                  onTap: () => carouselController.nextPage(),
-                                  child: Container(
-                                    height: screenHeight * 0.0631188119,
-                                    width: screenWidth * 0.136,
-                                    padding: EdgeInsets.fromLTRB(
-                                        screenWidth * 0.032,
-                                        screenHeight * 0.0176701,
-                                        screenWidth * 0.03034666,
-                                        screenHeight * 0.0188219),
-                                    decoration: const BoxDecoration(
-                                      color: AppPallete.blackColor,
-                                    ),
-                                    child: SvgPicture.asset(
-                                      'assets/icons/right_arrow.svg',
-                                      height: screenHeight * 0.0302617,
-                                      width: screenWidth * 0.0736533,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                    ),
+                    leading: SvgPicture.asset('assets/icons/search.svg'),
+                    padding: MaterialStateProperty.all(
+                      const EdgeInsets.only(left: 35, top: 10, bottom: 10),
+                    ),
+                    backgroundColor: MaterialStateProperty.all(
+                        AppPallete.searchBarBackground),
+                    elevation: MaterialStateProperty.all(0),
+                  ),
+                ),
+                const SizedBox(
+                  height: 46,
+                ),
+                const TabBar(
+                  unselectedLabelColor: AppPallete.thirdText,
+                  isScrollable: true,
+                  dividerHeight: 0,
+                  labelColor: AppPallete.primaryColor,
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  indicatorPadding: EdgeInsets.only(top: 45),
+                  indicatorWeight: 2,
+                  indicatorColor: AppPallete.primaryColor,
+                  indicator: BoxDecoration(
+                    color: AppPallete.primaryColor,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(40),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color(0xC33F151A), // Use the alpha color format
+                        offset: Offset(0, 4),
+                        blurRadius: 4,
+                        spreadRadius: 0,
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: screenHeight * 0.0495049505,
-                  ),
-                  SingleChildScrollView(
-                    child: GridView.builder(
-                      itemCount: 4,
-                      shrinkWrap: true,
-                      primary: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: screenHeight * 0.0297020,
-                        crossAxisSpacing: screenWidth * 0.034666,
-                        childAspectRatio: 0.7999,
+                  tabs: [
+                    Tab(
+                      child: Text(
+                        "Foods",
+                        style: TextStyle(
+                          fontFamily: "sfProText",
+                          fontWeight: FontWeight.w400,
+                          fontSize: 17,
+                        ),
                       ),
-                      itemBuilder: (context, index) => GestureDetector(
-                        onTap: () => Navigator.pushReplacement(
-                          context,
-                          PageRouteBuilder(
-                            pageBuilder:
-                                (context, animation, secondaryAnimation) =>
-                                    ProductDescriptionPage(index: index),
-                            transitionsBuilder: (context, animation,
-                                secondaryAnimation, child) {
-                              return child; // No animation, directly show the new page
-                            },
+                    ),
+                    Tab(
+                      child: Text(
+                        "Drinks",
+                        style: TextStyle(
+                          fontFamily: "sfProText",
+                          fontWeight: FontWeight.w400,
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
+                    Tab(
+                      child: Text(
+                        "Snacks",
+                        style: TextStyle(
+                          fontFamily: "sfProText",
+                          fontWeight: FontWeight.w400,
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
+                    Tab(
+                      child: Text(
+                        "Sauce",
+                        style: TextStyle(
+                          fontFamily: "sfProText",
+                          fontWeight: FontWeight.w400,
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 28,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 40),
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        "see more",
+                        style: TextStyle(
+                          fontFamily: 'sfProRoundedSemibold',
+                          color: AppPallete.primaryColor,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                AutoScaleTabBarView(
+                  children: [
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const FoodItemDescription(),
+                              ),
+                            ),
+                            child: FoodItemContainerWidget(index: 0),
                           ),
-                        ),
-                        child: ProductWidget(
-                          product: Constants.products[index],
-                          screenHeight: screenHeight,
-                          screenWidth: screenWidth,
-                        ),
+                          const SizedBox(
+                            width: 34,
+                          ),
+                          FoodItemContainerWidget(index: 1),
+                        ],
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: screenHeight * 0.01,
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    child: TextBoxWidget(
-                        screenWidth: screenWidth,
-                        screenHeight: screenHeight,
-                        textToDisplay: 'CHECK ALL LATEST '),
-                  ),
-                  SizedBox(
-                    height: screenHeight * 0.0594,
-                  ),
-                  Text(
-                    'Shop by categories',
-                    style: GoogleFonts.playfairDisplay(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 0.064 * screenWidth,
-                    ),
-                    textAlign: TextAlign.start,
-                  ),
-                  SizedBox(
-                    height: screenHeight * 0.0297029703,
-                  ),
-                  SingleChildScrollView(
-                    child: GridView.builder(
-                      itemCount: 4,
-                      shrinkWrap: true,
-                      primary: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: screenHeight * 0.0297029,
-                        crossAxisSpacing: screenWidth * 0.032,
-                        childAspectRatio: 0.7999,
-                      ),
-                      itemBuilder: (context, index) => GestureDetector(
-                        onTap: () {},
-                        child: CategoryWidget(
-                          screenHeight: screenHeight,
-                          screenWidth: screenWidth,
-                          category: Constants.categories[index],
-                        ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const FoodItemDescription(),
+                              ),
+                            ),
+                            child: FoodItemContainerWidget(index: 0),
+                          ),
+                          const SizedBox(
+                            width: 34,
+                          ),
+                          FoodItemContainerWidget(index: 1),
+                        ],
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: screenHeight * 0.0445544554,
-                  ),
-                  InkWell(
-                    onTap: () {},
-                    child: TextBoxWidget(
-                        screenWidth: screenWidth,
-                        screenHeight: screenHeight,
-                        textToDisplay: 'BROWSE ALL CATEGORIES'),
-                  ),
-                  SizedBox(
-                    height: screenHeight * 0.12376,
-                  )
-                ],
-              ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const FoodItemDescription(),
+                              ),
+                            ),
+                            child: FoodItemContainerWidget(index: 0),
+                          ),
+                          const SizedBox(
+                            width: 34,
+                          ),
+                          FoodItemContainerWidget(index: 1),
+                        ],
+                      ),
+                    ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const FoodItemDescription(),
+                              ),
+                            ),
+                            child: FoodItemContainerWidget(index: 0),
+                          ),
+                          const SizedBox(
+                            width: 34,
+                          ),
+                          FoodItemContainerWidget(index: 1),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 100,
+                )
+              ],
             ),
           ),
         ),
-        Positioned(
-          top: screenHeight * 0.822 + mediaQuery.padding.top,
-          left: screenWidth * 0.029,
-          right: screenWidth * 0.032,
-          bottom: mediaQuery.padding.bottom,
-          child: CustomBottomNavigationBar(
-            screenHeight: screenHeight,
-            screenWidth: screenWidth,
-            bodyContext: context,
-          ),
-        ),
-      ],
+      ),
     );
   }
 }
