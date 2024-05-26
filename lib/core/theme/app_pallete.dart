@@ -45,8 +45,9 @@ class AppPallete {
   /// 0xFF0038FF
   static const Color paypalContainerColor = Color(0xFF0038FF);
 
-
   /// background: #EFEEEE;
-static const Color searchBarBackground = Color(0xFFEFEEEE);
+  static const Color searchBarBackground = Color(0xFFEFEEEE);
 
+  /// grey color
+  static const Color greyColor = Color(0xFFEDEDED);
 }

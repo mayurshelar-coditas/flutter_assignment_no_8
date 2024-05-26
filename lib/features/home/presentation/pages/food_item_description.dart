@@ -1,7 +1,7 @@
 import 'package:assignment8/core/theme/app_pallete.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:flutter_svg/svg.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -36,6 +36,7 @@ class _FoodItemDescriptionState extends State<FoodItemDescription> {
               onPressed: () {},
               icon: SvgPicture.asset(
                 "assets/icons/heart.svg",
+                // ignore: deprecated_member_use
                 color: AppPallete.blackColor,
               ),
             ),
@@ -75,12 +76,15 @@ class _FoodItemDescriptionState extends State<FoodItemDescription> {
                     .toList(),
                 carouselController: _controller,
                 options: CarouselOptions(
-                    autoPlay: false,
-                    onPageChanged: (index, reason) {
-                      setState(() {
+                  autoPlay: false,
+                  onPageChanged: (index, reason) {
+                    setState(
+                      () {
                         _currentIndex = index;
-                      });
-                    }),
+                      },
+                    );
+                  },
+                ),
               ),
               const SizedBox(height: 38.0),
               Center(
@@ -154,7 +158,7 @@ class _FoodItemDescriptionState extends State<FoodItemDescription> {
                 height: 7,
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 50),
+                padding: const EdgeInsets.symmetric(horizontal: 50),
                 child: Text(
                   "Delivered between monday aug and thursday 20 from 8pm to 91:32 pm",
                   textAlign: TextAlign.start,

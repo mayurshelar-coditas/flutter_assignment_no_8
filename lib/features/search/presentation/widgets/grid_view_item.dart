@@ -18,7 +18,7 @@ class GridViewItem extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(
-                height: 50,
+                height: 46,
               ),
               Container(
                 width: double.infinity,
@@ -66,7 +66,7 @@ class GridViewItem extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(
-                        height: 38,
+                        height: 22,
                       ),
                     ],
                   ),
@@ -80,7 +80,7 @@ class GridViewItem extends StatelessWidget {
           right: 0,
           child: Container(
             height: MediaQuery.sizeOf(context).height * 0.14,
-            width: MediaQuery.sizeOf(context).height * 0.14,
+            width: MediaQuery.sizeOf(context).width * 0.2,
             clipBehavior: Clip.antiAliasWithSaveLayer,
             decoration: BoxDecoration(
               shape: BoxShape.circle,

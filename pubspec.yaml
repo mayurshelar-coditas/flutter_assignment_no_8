@@ -45,6 +45,7 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   flutter_zoom_drawer: ^3.2.0
   flutter_staggered_grid_view: ^0.7.0
+  flutter_slidable: ^3.1.0
 
 dev_dependencies:
   flutter_test:
@@ -100,7 +101,10 @@ flutter:
     - family: sfProText
       fonts:
         - asset: assets/fonts/sf_pro/SF-Pro-Text-Regular.otf
-        
+    
+    - family: sfProTextSemiBold
+      fonts: 
+        - asset: assets/fonts/sf_pro/SF-Pro-Text-Semibold.otf
     
   #
   # For details regarding fonts from package dependencies,

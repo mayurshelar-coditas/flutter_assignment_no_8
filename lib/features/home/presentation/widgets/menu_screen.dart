@@ -16,7 +16,7 @@ class MenuScreen extends StatelessWidget {
       backgroundColor: AppPallete.primaryColor,
       body: Padding(
         padding: const EdgeInsets.only(
-          left: 20,
+          left: 38,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,7 +57,7 @@ class MenuScreen extends StatelessWidget {
               height: 0.3,
               color: const Color(0xFFF4F4F8).withOpacity(0.4),
               thickness: 0.5,
-              indent: 20,
+              indent: 36,
               endIndent: 16,
             ),
             const Expanded(
@@ -97,7 +97,7 @@ class MenuScreen extends StatelessWidget {
               height: 0.3,
               color: const Color(0xFFF4F4F8).withOpacity(0.4),
               thickness: 0.5,
-              indent: 20,
+              indent: 36,
               endIndent: 16,
             ),
             const Expanded(
@@ -137,7 +137,7 @@ class MenuScreen extends StatelessWidget {
               height: 0.3,
               color: const Color(0xFFF4F4F8).withOpacity(0.4),
               thickness: 0.5,
-              indent: 20,
+              indent: 36,
               endIndent: 16,
             ),
             const Expanded(
@@ -175,7 +175,7 @@ class MenuScreen extends StatelessWidget {
               height: 0.3,
               color: const Color(0xFFF4F4F8).withOpacity(0.4),
               thickness: 0.5,
-              indent: 20,
+              indent: 36,
               endIndent: 16,
             ),
             const Expanded(
@@ -206,18 +206,27 @@ class MenuScreen extends StatelessWidget {
               flex: 20,
               child: SizedBox(),
             ),
-            TextButton(
-              onPressed: () {},
-              child: Text(
-                "Sign-out ->",
-                style: GoogleFonts.poppins(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 17,
-                  color: AppPallete.whiteColor,
+            Row(
+              children: [
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Sign-out",
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 17,
+                      color: AppPallete.whiteColor,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
                 ),
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-              ),
+                Image.asset(
+                  "assets/images/right_arrow.png",
+                  height: 26,
+                  width: 22,
+                ),
+              ],
             ),
             const SizedBox(
               height: 80,

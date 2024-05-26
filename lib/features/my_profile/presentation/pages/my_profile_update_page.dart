@@ -36,9 +36,12 @@ class MyProfileUpdatePage extends StatelessWidget {
               ),
               Row(
                 children: [
-                  const Text(
+                  Text(
+                    textScaler: MediaQuery.textScalerOf(context).scale(15) > 1.5
+                        ? const TextScaler.linear(1)
+                        : MediaQuery.textScalerOf(context),
                     "Personal details",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: "sfProText",
                       fontWeight: FontWeight.w600,
                       fontSize: 18,
@@ -49,9 +52,13 @@ class MyProfileUpdatePage extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {},
-                    child: const Text(
+                    child: Text(
+                      textScaler:
+                          MediaQuery.textScalerOf(context).scale(15) > 1.5
+                              ? const TextScaler.linear(1)
+                              : MediaQuery.textScalerOf(context),
                       "change",
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: AppPallete.primaryColor,
                         fontFamily: "sfProText",
                         fontWeight: FontWeight.w400,
@@ -103,8 +110,11 @@ class MyProfileUpdatePage extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 decoration: const BoxDecoration(
-                    color: AppPallete.whiteColor,
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                  color: AppPallete.whiteColor,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                ),
                 child: Row(
                   children: [
                     const Text(
@@ -163,8 +173,11 @@ class MyProfileUpdatePage extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 decoration: const BoxDecoration(
-                    color: AppPallete.whiteColor,
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                  color: AppPallete.whiteColor,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                ),
                 child: Row(
                   children: [
                     const Text(

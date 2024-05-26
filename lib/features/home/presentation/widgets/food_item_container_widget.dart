@@ -73,7 +73,7 @@ class FoodItemContainerWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 200,
               )
             ],

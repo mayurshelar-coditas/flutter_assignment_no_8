@@ -12,6 +12,7 @@ class SearchFoodItem extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFEEEEEE),
+        leadingWidth: 96,
         title: SearchBar(
           textStyle: MaterialStateProperty.all(
             const TextStyle(
@@ -35,16 +36,17 @@ class SearchFoodItem extends StatelessWidget {
         ),
       ),
       backgroundColor: const Color(0xFFEEEEEE),
-      body: Container(
-        decoration: const BoxDecoration(
-          color: AppPallete.forthBackgroud,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(30),
-            topRight: Radius.circular(30),
-          ),
-        ),
-        child: Padding(
+      body: Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 34),
+          decoration: const BoxDecoration(
+            color: AppPallete.forthBackgroud,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30),
+              topRight: Radius.circular(30),
+            ),
+          ),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -60,7 +62,7 @@ class SearchFoodItem extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: 46,
+                  height: 44,
                 ),
                 StaggeredGrid.count(
                   axisDirection: AxisDirection.down,

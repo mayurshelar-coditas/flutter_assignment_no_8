@@ -49,7 +49,7 @@ class Constants {
       rating: "#1,900",
     ),
     CartItemModel(
-      id: 1,
+      id: 3,
       name: "Veggie tomato mix",
       image: "assets/images/dish_one.png",
       rating: "#1,900",

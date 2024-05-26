@@ -42,32 +42,38 @@ class ProfileInformationWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Marvis Ighedosa',
-                    style: TextStyle(
-                      fontFamily: 'sfProText',
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18,
+                  const FittedBox(
+                    child: Text(
+                      'Marvis Ighedosa',
+                      style: TextStyle(
+                        fontFamily: 'sfProText',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 9,
+                  ),
+                  FittedBox(
+                    child: Text(
+                      maxLines: 1,
+                      overflow: TextOverflow.fade,
+                      'dosamarvis@gmail.com',
+                      style: TextStyle(
+                        fontFamily: 'sfProText',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 13,
+                        color: AppPallete.blackColor.withOpacity(0.5),
+                      ),
                     ),
                   ),
                   const SizedBox(
                     height: 9,
                   ),
                   Text(
-                    'dosamarvis@gmail.com',
-                    style: TextStyle(
-                      fontFamily: 'sfProText',
-                      fontWeight: FontWeight.w400,
-                      fontSize: 13,
-                      color: AppPallete.blackColor.withOpacity(0.5),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 9,
-                  ),
-                  Text(
-                    // maxLines: 2,
-                    // overflow: TextOverflow.ellipsis,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
                     'No 15 uti street off ovie palace road effurun delta state',
                     style: TextStyle(
                       color: AppPallete.blackColor.withOpacity(0.5),

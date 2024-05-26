@@ -1,13 +1,20 @@
+import 'package:assignment8/features/checkout/presentation/pages/checkout_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:assignment8/core/theme/app_pallete.dart';
 import 'package:assignment8/features/cart/presentation/widgets/cart_item_widget.dart';
 import 'package:assignment8/core/constants/constants.dart';
 import 'package:assignment8/core/di/di_container.dart';
 
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
   const CartPage({super.key});
 
+  @override
+  State<CartPage> createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     final cartItems = locator<Constants>().cartItems;
@@ -55,7 +62,47 @@ class CartPage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 14),
-                      child: CartItemWidget(index: index),
+                      child: Slidable(
+                        endActionPane: ActionPane(
+                          motion: const BehindMotion(),
+                          children: [
+                            Row(
+                              children: [
+                                const SizedBox(
+                                  width: 50,
+                                ),
+                                IconButton.filled(
+                                  onPressed: () {},
+                                  style: IconButton.styleFrom(
+                                    backgroundColor: AppPallete.redColor,
+                                  ),
+                                  icon: SvgPicture.asset(
+                                    "assets/icons/heart.svg",
+                                    color: AppPallete.whiteColor,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 15,
+                                ),
+                                IconButton.filled(
+                                  onPressed: () {
+                                    setState(() {
+                                      locator<Constants>()
+                                          .cartItems
+                                          .removeAt(index);
+                                    });
+                                  },
+                                  style: IconButton.styleFrom(
+                                    backgroundColor: AppPallete.redColor,
+                                  ),
+                                  icon: const Icon(Icons.delete),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        child: CartItemWidget(index: index),
+                      ),
                     );
                   },
                 ),
@@ -73,7 +120,12 @@ class CartPage extends StatelessWidget {
           child: SizedBox(
             width: double.infinity,
             child: FilledButton(
-              onPressed: () {},
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const CheckoutPage(),
+                ),
+              ),
               style: FilledButton.styleFrom(
                 backgroundColor: AppPallete.primaryColor,
                 shape: RoundedRectangleBorder(

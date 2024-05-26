@@ -1,5 +1,4 @@
-import 'package:assignment8/core/constants/constants.dart';
-import 'package:assignment8/core/di/di_container.dart';
+
 import 'package:assignment8/core/theme/app_pallete.dart';
 import 'package:assignment8/features/cart/presentation/pages/cart_page.dart';
 import 'package:assignment8/features/home/presentation/pages/food_item_description.dart';
@@ -8,7 +7,7 @@ import 'package:assignment8/features/home/presentation/widgets/custom_bottom_nav
 import 'package:assignment8/features/home/presentation/widgets/food_item_container_widget.dart';
 import 'package:autoscale_tabbarview/autoscale_tabbarview.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
